@@ -9,15 +9,39 @@ export default function Signin() {
   const [error, setError] = useState('');
 
   // check from input element as valid
+
+  const isInValid = password === '' || emailAddress === '';
   // email & password
+
+  const handleSignin = (event) => {
+    event.preventDefault();
+
+    // firebase work here!
+  };
 
   return (
     <>
       <HeaderContainer>
         <Form>
-          <Frame.Title>Sign In</Frame.Title>
+          <Form.Title>Sign In</Form.Title>
           {error && <Form.Error>{error}</Form.Error>}
-          <Form.Base onSubmit />
+          <Form.Base onSubmit={handleSignin} method="POST">
+            <Form.Input
+              placeholder="Email Address"
+              value={emailAddress}
+              onChange={({ target }) => setEmailAddress(target.value)}
+            />
+            <Form.Input
+              type="password"
+              placeholder="Password"
+              autoComplete="off"
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
+            />
+            <Form.Submit disable={isInValid} type="submit">
+              Sign In
+            </Form.Submit>
+          </Form.Base>
         </Form>
       </HeaderContainer>
       <FooterContainer />
