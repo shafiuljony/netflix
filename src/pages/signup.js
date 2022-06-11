@@ -25,12 +25,19 @@ export default function Signin() {
     // firebase work here!
     firebase
       .auth()
-      .signInWithEmailAndPassword(emailAddress, password)
-      .then(() => {
+      .createUserWithEmailAndPassword(emailAddress, password)
+      .then((result) =>
         // push to browser page
+        result.user.updateProfile({
+          displayName: firstName,
+          photoURL: Math.floor(Math.random() * 5) + 1,
+        })
+      )
+      .then(() => {
         history.push(ROUTES.BROWSE);
       })
       .catch((error) => {
+        setFirstName('');
         setEmailAddress('');
         setPassword('');
         setError(error.message);
@@ -66,7 +73,7 @@ export default function Signin() {
             </Form.Submit>
           </Form.Base>
           <Form.Text>
-            Have an Account? <Form.Link to="/signin">Sign In</Form.Link>
+            Already a user? <Form.Link to="/signin">Sign In</Form.Link>
           </Form.Text>
           <Form.TextSmall>
             This page is protected by Google reCAPTCHA to ensure you're not a bot/ Learn more.
