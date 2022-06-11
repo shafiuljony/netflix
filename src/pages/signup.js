@@ -41,9 +41,14 @@ export default function Signin() {
     <>
       <HeaderContainer>
         <Form>
-          <Form.Title>Sign In</Form.Title>
+          <Form.Title>Sign Up</Form.Title>
           {error && <Form.Error>{error}</Form.Error>}
-          <Form.Base onSubmit={handleSignin} method="POST">
+          <Form.Base onSubmit={handleSignup} method="POST">
+            <Form.Input
+              placeholder="First Name"
+              value={firstName}
+              onChange={({ target }) => setFirstName(target.value)}
+            />
             <Form.Input
               placeholder="Email Address"
               value={emailAddress}
@@ -57,11 +62,11 @@ export default function Signin() {
               onChange={({ target }) => setPassword(target.value)}
             />
             <Form.Submit disable={isInValid} type="submit">
-              Sign In
+              Sign Up
             </Form.Submit>
           </Form.Base>
           <Form.Text>
-            New to Netflix? <Form.Link to="/signup">Sign Up</Form.Link>
+            Have an Account? <Form.Link to="/signin">Sign In</Form.Link>
           </Form.Text>
           <Form.TextSmall>
             This page is protected by Google reCAPTCHA to ensure you're not a bot/ Learn more.
